@@ -1,0 +1,139 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>a2_1a</title><meta name="generator" content="MATLAB 9.0"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-02-11"><meta name="DC.source" content="a2_1a.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><pre class="codeinput">clc; clear <span class="string">all</span>; close <span class="string">all</span>;
+filename=<span class="string">'windedata.xlsx'</span>;
+wine = xlsread(filename, <span class="string">'White Wine'</span>);     <span class="comment">% reads the data from excel</span>
+
+   xbar=mean(wine)   ;                     <span class="comment">% mean of columns of experimental samples</span>
+   sigma=std(wine)  ;                      <span class="comment">% standard deviation of columns of experimental samples</span>
+   [m,n]=size(wine);                       <span class="comment">% get size of  experimental samples</span>
+   NormA=wine-(ones(m,1)*xbar);            <span class="comment">% mean shift</span>
+   NormA =NormA./(ones(m,1)*sigma);        <span class="comment">% scale by standard deviation</span>
+   X=NormA(1:3430,[1:n-1]);                <span class="comment">% extract input experimental data</span>
+   Y=NormA(1:3430,n);                      <span class="comment">% extract output experimental data</span>
+   alpha_O=inv(X.'*X)*X.'*Y                <span class="comment">% OLS slope estimate</span>
+   beta=mean(Y)-alpha_O.'*mean(X).';       <span class="comment">% OLS constant estimate</span>
+   Y1=NormA(3431:4898,n);                  <span class="comment">% actual values of test samples</span>
+   Y2=NormA(3431:4898,[1:n-1])*alpha_O;    <span class="comment">% model prediction for test samples</span>
+   RMSD =sqrt((Y1-Y2).'*(Y1-Y2)/(4898-3430));<span class="comment">% root mean square deviation</span>
+
+fprintf(<span class="string">'\n\n--------------------------------------------------------\n'</span>)
+fprintf(<span class="string">'\n Root mean square deviation for OLS of White wine test samples \n'</span>)
+fprintf(<span class="string">' RMSD = %s\n'</span>, RMSD)
+fprintf(<span class="string">'\n--------------------------------------------------------\n'</span>)
+</pre><pre class="codeoutput">
+alpha_O =
+
+    0.0582
+   -0.1862
+    0.0039
+    0.4592
+   -0.0004
+    0.0834
+   -0.0051
+   -0.5203
+    0.1418
+    0.1014
+    0.3016
+
+
+
+--------------------------------------------------------
+
+ Root mean square deviation for OLS of White wine test samples 
+ RMSD = 8.005169e-01
+
+--------------------------------------------------------
+</pre><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2016a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+clc; clear all; close all;
+filename='windedata.xlsx';
+wine = xlsread(filename, 'White Wine');     % reads the data from excel 
+   
+   xbar=mean(wine)   ;                     % mean of columns of experimental samples 
+   sigma=std(wine)  ;                      % standard deviation of columns of experimental samples
+   [m,n]=size(wine);                       % get size of  experimental samples
+   NormA=wine-(ones(m,1)*xbar);            % mean shift
+   NormA =NormA./(ones(m,1)*sigma);        % scale by standard deviation
+   X=NormA(1:3430,[1:n-1]);                % extract input experimental data
+   Y=NormA(1:3430,n);                      % extract output experimental data
+   alpha_O=inv(X.'*X)*X.'*Y                % OLS slope estimate
+   beta=mean(Y)-alpha_O.'*mean(X).';       % OLS constant estimate
+   Y1=NormA(3431:4898,n);                  % actual values of test samples
+   Y2=NormA(3431:4898,[1:n-1])*alpha_O;    % model prediction for test samples
+   RMSD =sqrt((Y1-Y2).'*(Y1-Y2)/(4898-3430));% root mean square deviation
+ 
+fprintf('\n\nREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH\n')
+fprintf('\n Root mean square deviation for OLS of White wine test samples \n')
+fprintf(' RMSD = %s\n', RMSD)
+fprintf('\nREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH\n')
+
+ 
+##### SOURCE END #####
+--></body></html>

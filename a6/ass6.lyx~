@@ -1,0 +1,782 @@
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+ 
+\usepackage{graphicx}
+%\usepackage{color}
+
+%\sloppy
+%\definecolor{lightgray}{gray}{0.5}
+%\setlength{\parindent}{0pt}
+
+
+\usepackage{listings}
+\usepackage{color} %red, green, blue, yellow, cyan, magenta, black, white
+\definecolor{mygreen}{RGB}{28,172,0} % color values Red, Green, Blue
+\definecolor{mylilas}{RGB}{170,55,241}
+
+
+\lstset{language=matlab,%
+    %basicstyle=\color{red},
+    breaklines=true,%
+    morekeywords={matlab2tikz},
+    keywordstyle=\color{blue},%
+    morekeywords=[2]{1}, keywordstyle=[2]{\color{black}},
+    identifierstyle=\color{black},%
+    stringstyle=\color{mylilas},
+    commentstyle=\color{mygreen},%
+    showstringspaces=false,%without this there will be a symbol in the places where there is a space
+    numbers=left,%
+    numberstyle={\tiny \color{black}},% size of the numbers
+    numbersep=9pt, % this defines how far the numbers are from the text
+    emph=[1]{for,end,break},emphstyle=[1]\color{red}, %some words to emphasise
+    %emph=[2]{word1,word2}, emphstyle=[2]{style},    
+}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 2cm
+\topmargin 3cm
+\rightmargin 2cm
+\bottommargin 2cm
+\headheight 2cm
+\headsep 2cm
+\footskip 1cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+
+\series bold
+CH5440 HW6
+\end_layout
+
+\begin_layout Author
+Prem Sagar S - AE14B021
+\end_layout
+
+\begin_layout Section*
+Problem 1
+\end_layout
+
+\begin_layout Subsection*
+Part a
+\end_layout
+
+\begin_layout Standard
+To apply KPCA the Kernel chosen was Gaussian kernel.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+K(x_{i},x_{j})=exp\left(-\frac{(x_{i}-x_{j})^{2}}{width}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+No PCA is applied in the feature space to get the regression matrix B.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+p_{sat}=TB
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where T is the scores matrix.
+\end_layout
+
+\begin_layout Standard
+Using this regression matrix, the estimate for the saturated pressures 
+\begin_inset Formula $\hat{p}_{sat}$
+\end_inset
+
+ is obtained.
+ The norm of the difference of the true and the estimated saturated pressures
+ is obtained.
+ Also to obtain the regression matrix, we need to know the number of PCs
+ to retain.
+ Using these two as input variables, the KPCR function was written to return
+ the errors.
+\end_layout
+
+\begin_layout Standard
+The least error was observerd for:
+\end_layout
+
+\begin_layout Itemize
+5 PCs and width=10.6561
+\end_layout
+
+\begin_layout Standard
+The plot below shows the error plot for 5 PCs.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename optimalWidth.eps
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Error plot to obtain optimal width for the optimal PC
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Part b
+\end_layout
+
+\begin_layout Standard
+Using the above model, the saturation pressures were obtained for 55
+\begin_inset Formula $^{0}C$
+\end_inset
+
+ and 100
+\begin_inset Formula $^{0}C$
+\end_inset
+
+ .
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+T=55
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+T=100
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\hat{p}_{sat}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+63.64261
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+246.7662
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $p_{sat}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+63.96445
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+246.2437
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The predicted saturation pressures are quite close to the true saturation
+ pressure.
+ 
+\end_layout
+
+\begin_layout Standard
+The same can be observed from the plot below.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename comparison.eps
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Model comparison with the test data
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Problem 2
+\end_layout
+
+\begin_layout Subsection*
+Part a
+\end_layout
+
+\begin_layout Standard
+The first order ARX model is given by,
+\begin_inset Formula 
+\[
+y_{k+1}=a_{0}y_{k}+b_{0}u_{k}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This was calculated using an OLS regression on 
+\begin_inset Formula $\left[y_{1000:2}\right]_{1\times999}=\begin{bmatrix}a_{0} & b_{0}\end{bmatrix}\begin{bmatrix}y_{999:1}\\
+u_{999:1}
+\end{bmatrix}_{2\times999}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\begin{bmatrix}a_{0} & b_{0}\end{bmatrix}=\begin{bmatrix}0.4776 & 0.7228\end{bmatrix}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Part b
+\end_layout
+
+\begin_layout Standard
+The model in implicit form can be written as:
+\begin_inset Formula 
+\[
+\begin{bmatrix}1 & -a_{1} & -b_{1}\end{bmatrix}\begin{bmatrix}y_{k}\\
+y_{k-1}\\
+u_{k-1}
+\end{bmatrix}=0
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Assuming the variables have equal variances, the data matrix is constructed
+ as below:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+A==\begin{bmatrix}y_{1000:2} & y_{999:1} & u_{k:1}\end{bmatrix}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A has dimensions (999 samples x 3 variables).
+\end_layout
+
+\begin_layout Standard
+Performing the svd on this and since we know that only one constraint exists,
+ the model parameters can be obtained by taking the last eigen vector.
+\begin_inset Formula 
+\[
+\begin{bmatrix}a_{1} & b_{1}\end{bmatrix}=\begin{bmatrix}0.5310 & 0.7533\end{bmatrix}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Part c
+\end_layout
+
+\begin_layout Standard
+Let the stacking order be 
+\series bold
+m.
+ 
+\series default
+The true model order be p.
+\end_layout
+
+\begin_layout Standard
+The constraint matrix can be written as below.
+ 
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename New Doc 49_1.jpg
+	lyxscale 40
+	scale 20
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For 
+\begin_inset Formula $y_{k}$
+\end_inset
+
+, the first element of first row is 1 and the next p elements are the model
+ coefficients 
+\series bold
+
+\begin_inset Formula $a_{i}$
+\end_inset
+
+
+\series default
+, followed by 
+\series bold
+m-p 
+\series default
+zeroes.
+ This is followed by p model coefficients for the input 
+\begin_inset Formula $b_{i}$
+\end_inset
+
+, then followed by 
+\series bold
+m-p 
+\series default
+zeroes.
+ Now we can stack the constraint matrix upto 
+\series bold
+m-p 
+\series default
+rows to so as to estimate upto 
+\begin_inset Formula $y_{k-m+p}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The size of the constraint matrix is therefore (m-p+1)
+\begin_inset Formula $\times$
+\end_inset
+
+(2m+1).
+\end_layout
+
+\begin_layout Standard
+So the number of constraints is 
+\series bold
+m-p+1
+\end_layout
+
+\begin_layout Standard
+If the true order of the model is 1, the number of constraints is m-1+1
+\series bold
+=m.
+\end_layout
+
+\begin_layout Subsection*
+Part d
+\end_layout
+
+\begin_layout Standard
+The structure of A is as below: (C
+\begin_inset Formula $\begin{bmatrix}y\\
+u
+\end{bmatrix}$
+\end_inset
+
+=0)
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename fulla.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Standard
+If this is written in explicit form,
+\begin_inset Formula 
+\[
+\hat{A}y=\hat{B}u
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Structure of A:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename A.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The data matrix is made by stacking 10 previous outputs and 10 previous
+ inputs for the kth output.
+ This was done starting from 1000:11 outputs.
+ This gives a data matrix of size 21
+\begin_inset Formula $\times990$
+\end_inset
+
+.
+ Performing PCA on this and knowing that there are 10-1+1=10 constraints,
+ the implicit constraint matrix 
+\begin_inset Formula $\hat{C}$
+\end_inset
+
+ (10*21).
+ From this 
+\begin_inset Formula $\hat{A}$
+\end_inset
+
+ can be obtained by taking the first 11 columns.
+ This is upto a rotation and must be transformed to the structure of A.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\hat{A}^{T}*M=A_{trueStruc}^{T}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+y^{T}\hat{A}^{T}=u^{T}\hat{B}^{T}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Post multiplying by the rotation matrix, 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+y^{T}\hat{A}^{T}M=u^{T}\hat{B}^{T}M
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+y^{T}A_{trueStruc}^{T}=u^{T}B_{trueStruc}^{T}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+A_{trueStruc}y=B_{trueStruc}u
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The rotation matrix was calculated to be:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename rotation matrix.png
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Now comparing the rotated A with the true A, we can get the model parameters.
+ But all the elements are not similar to the structure.
+ Hence an average of the corresponding elements were taken to get an estimate
+ for the model parameters.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+a_{0} & =1.5296e-17
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+b_{0} & =43.2882
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This is a very different result obtained as compared to OLS ans TLS in part
+ b here the stacking order was 1.
+ So overstacking results in an erroneous model identification.
+ The main issue why this happens is that it's assumed that the error variances
+ of all the 
+\begin_inset Formula $y_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $u_{i}$
+\end_inset
+
+ are equal while this is not true at all.
+ 
+\end_layout
+
+\end_body
+\end_document
